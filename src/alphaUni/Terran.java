@@ -65,6 +65,15 @@ public class Terran {
 			
 			connection.connect();
 			
+			int responseCode = connection.getResponseCode();
+			String responseMessage = connection.getResponseMessage();
+			
+			if(responseCode == HttpURLConnection.HTTP_OK) {
+				
+				Scanner scanner = new Scanner(url.openStream());
+				
+			}
+			
 		
 			
 			
