@@ -7,10 +7,11 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 public class Terran {
-	StringBuilder postInfo = new StringBuilder();
+	
 	
 	
 	public StringBuilder postFromTerran() {
+		StringBuilder postInfo = new StringBuilder();
 		
 		try {
 			URL url = new URL("https://regres.in/api/users");
@@ -52,33 +53,50 @@ public class Terran {
 	}
 	
 	
-	StringBuilder getInfo = new StringBuilder();
 	
 	public StringBuilder getFromTerran() {
+		StringBuilder getInfo = new StringBuilder();
+		HttpURLConnection connection = null;
+		Scanner scanner  = null;
+		
+		int responseCode = 0;
+		String responseMessage ="intial";
 		
 		try {
 			URL url = new URL("");
 			
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection = (HttpURLConnection) url.openConnection();
 			
 			connection.setRequestMethod("GET");
 			
 			connection.connect();
 			
-			int responseCode = connection.getResponseCode();
-			String responseMessage = connection.getResponseMessage();
+			responseCode = connection.getResponseCode();
+			responseMessage = connection.getResponseMessage();
 			
 			if(responseCode == HttpURLConnection.HTTP_OK) {
 				
-				Scanner scanner = new Scanner(url.openStream());
+				scanner = new Scanner(url.openStream());
 				
+				while(scanner.hasNext()) {
+					
+					getInfo.append(scanner.nextLine());
+				}
+				
+			}else {
+				System.out.println("ResponseCode: " + responseCode);
+				System.out.println("ResponseMessage: " + responseMessage);
 			}
 			
-		
+			
 			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Exception: " + e.getMessage());
+			
+		} finally{
+			scanner.close();
+			connection.disconnect();
 		}
 		
 		return getInfo;
