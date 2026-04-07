@@ -42,7 +42,7 @@ public class Terran {
 				
 			}else {
 				
-				throw new RuntimeException("This didnt work. The response code received is "+ responseCode+ " and responseMessage is "+ responseMessage);
+				throw new RuntimeException("An error occured The code received is "+ responseCode+ " and responseMessage is "+ responseMessage);
 			}
 			
 		} catch (Exception e) {
@@ -87,8 +87,6 @@ public class Terran {
 				System.out.println("ResponseCode: " + responseCode);
 				System.out.println("ResponseMessage: " + responseMessage);
 			}
-			
-			
 			
 			
 		} catch (Exception e) {
